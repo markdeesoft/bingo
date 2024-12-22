@@ -17,7 +17,7 @@ const httpOptions = {
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
@@ -49,7 +49,7 @@ export class GameComponent {
 
   finish = false;
 
-  iframe_url!: SafeUrl;
+  iframe_url: SafeUrl = '';
   url: string = '';
 
   td_style: any = [];
@@ -66,13 +66,9 @@ export class GameComponent {
     private http: HttpClient,
     public sanitizer: DomSanitizer,
   ) {
+  }
 
-    // const url = googleTTS.getAudioUrl('Hello World', {
-    //   lang: 'th',
-    //   slow: false,
-    //   host: 'https://translate.google.com',
-    // });
-
+  ngOnInit(): void {
     if( this.storage.get("bingo") === null ){
       this.setLocalStorge();
     }else{
@@ -93,12 +89,6 @@ export class GameComponent {
         this.td_class[key] = '';
       }
     });
-  }
-
-  ngOnInit(): void {
-    // this.url = "https://translate.google.com.vn/translate_tts?ie=UTF-8&q= &tl=th&client=tw-ob";
-    // this.iframe_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
-    // this.iframe_url = this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
   public getHeaders(): HttpHeaders {
@@ -166,10 +156,6 @@ export class GameComponent {
     }
   }
 
-  randomIntFromInterval(min:number, max:number) { // min and max included 
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
   rendomNumber(items: Array<any>){
     var number = items[Math.floor(Math.random()*(items.length-1))];
     // var number = this.randomIntFromInterval(0,items.length)
@@ -185,7 +171,7 @@ export class GameComponent {
 
   setLocalStorge(){
 
-    for(let i=0;i<this.number_max;i++){
+    for(let i=0;i<=this.number_max;i++){
       var value = {
         number: i,
         status: false,

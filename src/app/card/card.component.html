@@ -1,1 +1,66 @@
-<p>card works!</p>
+<section class="bg-gray-50 dark:bg-gray-900">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-3xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                  สร้างการ์ด bingo
+              </h1>
+              <form class="space-y-4 md:space-y-6" (ngSubmit)="submitForm()" (keydown.enter)="handleEnterKeyPress($event)">
+                <div class="grid gap-6 mb-10 md:grid-cols-2">
+                  <div>
+                      <label for="number_min" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">จำนวนตัวเลขต่ำสุด (0)</label>
+                      <input type="number" id="number_min" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" required min="0" [(ngModel)]="number_min" [ngModelOptions]="{standalone: true}"/>
+                  </div>
+                  <div>
+                      <label for="number_max" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">จำนวนตัวเลขมากสุด (99)</label>
+                      <input type="number" id="number_max" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" required min="1" [(ngModel)]="number_max" [ngModelOptions]="{standalone: true}"/>
+                  </div>
+                  <div>
+                    <label for="column_amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">จำนวนคอลั่มน์ (2-5)</label>
+                    <input type="number" id="column_amount" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" required min="2" [(ngModel)]="column_amount" [ngModelOptions]="{standalone: true}"/>
+                  </div>
+                  <div>
+                      <label for="row_amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">จำนวนแถว (2-5)</label>
+                      <input type="number" id="row_amount" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" required min="2" max="99" [(ngModel)]="row_amount" [ngModelOptions]="{standalone: true}"/>
+                  </div>
+                  <div>
+                    <label for="card_amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">จำนวนการ์ด (1-100)</label>
+                    <input type="number" id="card_amount" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1-100" required min="1" max="100" [(ngModel)]="card_amount" [ngModelOptions]="{standalone: true}"/>
+                  </div>
+                  <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                      <input  [(ngModel)]="is_duplicade" [ngModelOptions]="{standalone: true}" id="is_duplicade" type="checkbox" [value]="true" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                      <label for="is_duplicade" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">ให้มีเลขซ้ำในการ์ดได้</label>
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" >สร้างการ์ด</button>
+                </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+<div id="pdfTable" #pdfTable *ngIf="table_datas.length>0" class="w-full px-5">
+
+  <div class="grid grid-cols-2">
+    <ng-container *ngFor="let table of table_datas;let ri = index">
+      <div class="w-full border px-5 pb-6 pt-3 border-gray-700 border-dashed mb-11">
+        <h1 class="text-2xl">Card No.{{ri+1}}</h1>
+        <table class="table_card w-full">
+          <tbody>
+            <tr *ngFor="let rows of table.rows" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td *ngFor="let cols of rows.cols;" scope="row" class="py-5 text-3xl font-bold text-gray-900 whitespace-nowrap dark:text-white text-center border border-gray-400" >
+                {{cols}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
