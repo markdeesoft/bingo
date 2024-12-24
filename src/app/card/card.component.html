@@ -44,11 +44,10 @@
 </section>
 
 
-<div id="pdfTable" #pdfTable *ngIf="table_datas.length>0" class="w-full px-5">
-
+<div id="pdfTable" #pdfTable *ngIf="table_datas.length>0" class="w-[1075px] overflow-x-hidden px-5" style="width: 1075px;">
   <div class="grid grid-cols-2">
     <ng-container *ngFor="let table of table_datas;let ri = index">
-      <div class="w-full border px-5 pb-6 pt-3 border-gray-700 border-dashed mb-11">
+      <div class="w-full border px-5 pb-6 pt-3 border-gray-700 border-dashed" style="margin-bottom: 43px;">
         <h1 class="text-2xl">Card No.{{ri+1}}</h1>
         <table class="table_card w-full">
           <tbody>

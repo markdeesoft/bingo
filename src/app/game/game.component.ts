@@ -106,8 +106,13 @@ export class GameComponent {
   }
 
   getCurrentNumber(){
+
     if( this.number_not_get.length>0 ) {
 
+      if( this.number_loading ){
+        return;
+      }
+      
       this.number_loading = true;
 
       this.td_class[this.last_key] = '';
