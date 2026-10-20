@@ -1,27 +1,74 @@
-# Bingo
+# 🎲 Bingo Game Web Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
+เกมบิงโกสำหรับเล่นขำๆสนุกๆงานเลี้ยงออฟฟิศ(อิอิ) มาพร้อมฟีเจอร์ครบครัน ทั้งการสุ่มตัวเลขแบบเคลื่อนไหว, การพิมพ์ใบการ์ดสำหรับผู้เล่น, ตารางบันทึกผลย้อนหลัง และระบบเสียงประกาศตัวเลขอัตโนมัติ
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## ✨ คุณสมบัติหลัก (Features)
 
-## Code scaffolding
+* **🎰 ระบบสุ่มตัวเลขแบบเคลื่อนไหว (Animated Random Number Generator)**
+  * เอฟเฟกต์ตัวเลขวิ่งสุ่มเพิ่มความตื่นเต้นก่อนแสดงผลลัพธ์
+  * ระบบป้องกันการออกซ้ำอัตโนมัติ (1-75)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* **🔊 ระบบเสียงประกาศตัวเลข (Voice Announcement)**
+  * ใช้ **Google Translate / Web Speech API** ในการสังเคราะห์เสียงพูด (Text-to-Speech) เพื่อประกาศหมายเลขที่ออกโดยอัตโนมัติ ช่วยให้ผู้เล่นทุกคนได้ยินชัดเจนทั่วกัน
 
-## Build
+* **🖨️ ระบบพิมพ์ใบการ์ดสำหรับผู้เล่น (Printable Bingo Cards)**
+  * สร้างใบการ์ดบิงโกมาตรฐาน (5x5) พร้อมช่อง FREE และสุ่มตัวเลขไม่ซ้ำกันในแต่ละใบ
+  * รองรับการจัดหน้าเพื่อสั่งพิมพ์ (Print-Friendly) ออกทางกระดาษหรือบันทึกเป็น PDF ได้ทันที
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* **📊 ตารางแสดงตัวเลขย้อนหลัง (Number History Board)**
+  * กระดานแสดงสถานะตัวเลขทั้งหมด (Master Board) ที่ถูกสุ่มไปแล้วแบบ Real-time
+  * แสดงลำดับตัวเลขย้อนหลังจากล่าสุดไปหาอดีต ตรวจสอบง่าย
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🛠️ เทคโนโลยีที่ใช้ (Tech Stack)
 
-## Running end-to-end tests
+* **Frontend Framework:** Angular (TypeScript)
+* **Styling:** Tailwind CSS
+* **Audio / Voice API:** Web Speech API / Google Translate TTS Engine
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## 🚀 การติดตั้งและเปิดใช้งาน (Getting Started)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 1. การเตรียมสภาพแวดล้อม
+ตรวจสอบให้แน่ใจว่าเครื่องของคุณได้ทำการติดตั้ง Node.js (เวอร์ชัน LTS) เรียบร้อยแล้ว
+
+### 2. ติดตั้งโปรเจกต์
+ทำการ Clone Repository และติดตั้ง Dependencies:
+```bash
+git clone https://github.com/markdeesoft/bingo.git
+cd bingo
+npm install
+```
+
+### 3. รันโปรเจกต์ในโหมดพัฒนา (Development Mode)
+```bash
+ng serve
+```
+จากนั้นเปิดเว็บเบราว์เซอร์แล้วเข้าไปที่ `http://localhost:4200`
+
+---
+
+## 📖 วิธีการใช้งาน (How to Play)
+
+1. **การเตรียมการ์ดผู้เล่น:**
+   * คลิกเลือกแท็บ **"พิมพ์การ์ดเล่น"**
+   * กำหนดจำนวนใบการ์ดที่ต้องการ แล้วกดปุ่ม **"สั่งพิมพ์ (Print / PDF)"** เพื่อแจกจ่ายให้ผู้เล่น
+
+2. **การดำเนินเกมบิงโก:**
+   * กลับมาที่หน้า **"กระดานสุ่มเลข"**
+   * กดปุ่ม **"สุ่มตัวเลขต่อไป"** หรือกด `Spacebar` บนคีย์บอร์ด
+   * ตัวเลขจะวิ่งสุ่มบนหน้าจอ และระบบจะส่งเสียงขานหมายเลขที่ออกให้อัตโนมัติ
+
+3. **การตรวจสอบผล:**
+   * ตรวจสอบตัวเลขย้อนหลังผ่าน **Master Board (1-75)** หรือรายการย้อนหลังจากแถบแสดงผลด้านข้าง
+
+---
+## 📄 ใบอนุญาต (License)
+
+โครงการนี้เผยแพร่ภายใต้ใบอนุญาต **MIT License** - สามารถนำไปใช้งาน ปรับแต่ง และพัฒนาต่อได้อย่างเสรี
+
+
